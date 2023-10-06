@@ -138,13 +138,13 @@ const Form = () => {
         resetForm,
       })=>(
         <form onSubmit={handleSubmit}>
-    <Box   backdropFilter='auto' backdropBlur='8px'  >
+    <Box  {...headingOptions} backdropFilter="auto" backdropBlur='3px'   >
       
       
       <ChakraProvider theme={theme} >
-      <Card  bgColor={"whiteAlpha.100"}  width={isMobile? "340px" : "500px"} className='SignUpForm' mt={isMobile? "10rem" :"2rem"} >
+      <Card   bgColor={"whiteAlpha.100"}  width={isMobile? "340px" : "500px"} className='SignUpForm' mt={isMobile? "10rem" :"2rem"} >
         <CardBody>
-        <Heading textAlign="center" size="xl" mb="6">
+        <Heading textAlign="center" size="xl" mb="7" textColor={"white"}>
         {isLogin ? "Login": "Sign Up"}
       </Heading>
         
@@ -160,6 +160,7 @@ const Form = () => {
         value={values.username}
         name="username"
         mb="6"
+        textColor={"white"}
         error={Boolean(touched.username)&& Boolean(errors.username)}
         _placeholder={{ opacity: 1, color: 'white' }}
         helperText={touched.username && errors.username}
@@ -173,6 +174,7 @@ const Form = () => {
         onBlur={handleBlur}
          onChange={handleChange}
          value={values.firstName}
+         textColor={"white"}
          name="firstName"
          error={Boolean(touched.firstName)&& Boolean(errors.firstName)}
          helperText={touched.firstName && errors.firstName}
@@ -185,6 +187,7 @@ const Form = () => {
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.lastName}
+        textColor={"white"}
         name="lastName"
         error={Boolean(touched.lastName)&& Boolean(errors.lastName)}
         helperText={touched.lastName && errors.lastName}
@@ -206,6 +209,7 @@ const Form = () => {
          onBlur={handleBlur}
          onChange={handleChange}
          value={values.email}
+         textColor={"white"}
          name="email"
          error={Boolean(touched.email)&& Boolean(errors.email)}
          helperText={touched.email && errors.email}
@@ -218,6 +222,7 @@ const Form = () => {
         <Input variant='flushed'
         onBlur={handleBlur}
         onChange={handleChange}
+        textColor={"white"}
         value={values.password}
         name="password"
         error={Boolean(touched.password)&& Boolean(errors.password)}
@@ -248,6 +253,7 @@ const Form = () => {
         setPageType(isLogin?"register":"login")
         resetForm();
       }}
+      textColor={"white"}
       mt={"20px"}
       _hover={{ textColor: "#c961de" }}
       sx={{

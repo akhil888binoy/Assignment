@@ -4,7 +4,8 @@ import { DrawerOverlay  , DrawerContent,  DrawerBody , Button  , useDisclosure} 
 import { Link } from 'react-router-dom';
 import {  HStack } from '@chakra-ui/react'; 
 import {  Box } from '@chakra-ui/react';
-import { useMediaQuery } from '@chakra-ui/react';
+import { useMediaQuery, Image } from '@chakra-ui/react';
+import logo from "../assets/logo.png"
 
 function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -29,7 +30,7 @@ function Header() {
     zIndex={"overlay"}
     onClick={onOpen}>
         <Box mx={4}>
-                            < Avatar  alt="Logo" bgColor={"red"} objectFit="contain" w="50px" h="50px"   />
+                            < Avatar src={logo} alt="Logo"  objectFit="contain" w="55px" h="55px"   />
                      </Box>
     
     </Avatar>
@@ -55,6 +56,10 @@ function Header() {
                         <Link to={'/listing'}>List Books</Link>
                     </Button>
                    
+
+                    <Box mx={4}>
+                            < Avatar src={logo} alt="Logo" variant={"ghost"} objectFit="contain"   size={isMobile?"md" : "lg"} />
+                     </Box>
                     <Button onClick={onClose}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" }}
         sx={{
           "&:hover > *": {
