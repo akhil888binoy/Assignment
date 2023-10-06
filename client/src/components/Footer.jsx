@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <Box bgColor={"blue.200"} >  
     <Text textAlign={"center"}>
-    Designed and Developed by Akhil Binoy
+    Designed and Developed by Akhil Binoy 👽
 
     </Text>
     </Box>

@@ -194,7 +194,7 @@ w={isMobile ? "" : "50rem"}
 />
 
 
-<CardBody {...hackathonOptions}  ml={isMobile? "7rem" : "10rem"}  mt={isMobile  ? "1rem" : "5rem"} mb={isMobile? "10rem" : ""}>
+<CardBody {...hackathonOptions}  ml={isMobile? "7rem" : "7rem"}  mt={isMobile  ? "1rem" : "5rem"} mb={isMobile? "10rem" : ""}>
 
 <Heading size={isMobile ? "lg" : "lg"} mt={isMobile?"18rem" : " "} textColor={"white"}> Book Title</Heading>
   
@@ -208,12 +208,12 @@ w={isMobile ? "" : "50rem"}
 
 </CardBody>
 
-<CardFooter {...hackathonfooterOptions} ml={isMobile? "11rem": "13rem"} mt={isMobile? "3rem":"11rem"} mr={isMobile?"10rem":""} >
+<CardFooter {...hackathonfooterOptions} ml={isMobile? "11rem": "12rem"} mt={isMobile? "3rem":"11rem"} mr={isMobile?"10rem":""} >
 <Button variant='solid' textColor={"white"} bgGradient={"linear-gradient(315deg, #facc6b 0%, #fabc3c 74%)"} mx={isMobile ? "4" : "9"} size={isMobile ? "sm" : "md"}>
 $1000
 </Button>
 <Button variant='solid' textColor={"white"}  bgColor={"#1c1c65"} size={isMobile ? "sm" : "md"}  mr="10" >
- hackers
+ Name of Author
 </Button>
 
 </CardFooter>
