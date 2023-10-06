@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {  Box, Card, theme, FormControl,  CardBody , ChakraProvider} from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
 import { useMediaQuery } from "@chakra-ui/react";
-import { setLogin } from "../../../state";
+import { setLogin } from "../../state";
 
   import { 
    

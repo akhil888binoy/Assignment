@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import authReducer from "./state";
+import "./main.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import {
