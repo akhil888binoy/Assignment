@@ -5,8 +5,9 @@ import Footer from './components/Footer';
 import LoginPage from './scenes/loginPage';
 import Header from './components/Header';
 import BookList from './scenes/listingPage';
-
+import { useSelector } from 'react-redux';
 function App() {
+  const mode = useSelector((state) => state.mode);
 
   return (
     <Router>

@@ -5,32 +5,15 @@ import { Avatar, Box ,
   Stack, useMediaQuery, 
   Card,  
   CardBody, CardFooter,  
-  Text , Button ,  HStack, 
+  Text , Button ,   
   VStack } from '@chakra-ui/react';
-import React from 'react';
-import { useEffect , useState} from 'react';
 import img2 from "../../assets/logo.png";
 import img3 from "../../assets/coverlogin.jpg";
-import { Link } from 'react-router-dom';
-import { Radio, RadioGroup } from '@chakra-ui/react';
 
 
 
-const headingOptions={
-   position : "absolute",
-   left : "40%",
-   transform : "translate(-50%, -50%)",
-   p:"4",
-   size:"4x1",
-}
-const buttonOptions={
- position : "absolute",
-   left : "40%",
-   
-   transform : "translate(-50%, -50%)",
-   p:"4",
-   size:"4x1",
-}
+
+
 
 const cardOptions={
  position : "absolute",
@@ -49,13 +32,7 @@ const hackathonOptions={
    p:"4",
    size:"4x1",
 }
-const locationOptions={
- position : "absolute",
-  left:"90%",
-   top : "12%",
-   transform : "translate(-50%, -50%)",
-   px:"4"
-}
+
 
 const hackathonfooterOptions={
  position : "absolute",
@@ -67,16 +44,10 @@ const hackathonfooterOptions={
 }
 
 
-const theme = {
-   fonts: {
-     body: 'Poppins',
-     heading: 'Poppins, sans-sarif',
-   },
- };
+
 
 
 const BookListing = () => {
- const [isOpen, setIsOpen] = React.useState(false);
  
  
 
@@ -101,7 +72,7 @@ const BookListing = () => {
            alignItems={isMobile ? "center" : "flex-start"}
            flexWrap={isMobile ? "wrap" : "nowrap"}
            direction={["column", "row"]}>
-<Card  bgColor={"whiteAlpha.100"}w={"23rem"} display={isMobile ? "none" : ""}>
+<Card  bgColor={"whiteAlpha.100"}w={"28rem"} display={isMobile ? "none" : ""}>
 <CardBody >
 <Center>
 <Heading size='md' mt={"4"} textColor={"white"}>Filters
@@ -113,39 +84,39 @@ const BookListing = () => {
 <VStack mt='6' spacing='3'>
   
 <Heading size={"md"} textColor={"white"}> Interested Genre</Heading>
-  <Stack direction={"row"}>
+  <Stack direction={"row"} mt={"1rem"}>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"} >
-    Tags
+  Fiction
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Buttontag
+  True Crime 
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm'  borderRadius={"20px"} >
-    Button
+  Philosophy
   </Button>
 
   </Stack>
   <Stack direction={"row"}>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"} >
-    Button
+  Travel
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Button
+  Self-Help
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Button
+  Biography
   </Button>
 
   </Stack>
   <Stack direction={"row"}>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Button
+  Adventure
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Button
+  Historical 
   </Button>
   <Button colorScheme='teal' textColor="white" size='sm' borderRadius={"20px"}>
-    Button
+  Horror
   </Button>
 
   </Stack>
@@ -202,6 +173,10 @@ w={isMobile ? "" : "50rem"}
   
 <Text textColor={"white"} my={isMobile ? "3" : "4"} textAlign={"center"}  fontWeight={"bold"} fontSize={isMobile ? "15px" : "15px"} borderRadius={"10px"} bgColor={"purple"}>
  Name of Seller
+</Text>
+
+<Text textColor={"white"} my={isMobile ? "3" : "4"} textAlign={"center"}  fontWeight={"bold"} fontSize={isMobile ? "15px" : "15px"} borderRadius={"10px"} bgColor={"purple"}>
+ Genre
 </Text>
 
   

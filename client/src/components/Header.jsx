@@ -1,16 +1,22 @@
-import {  Avatar } from '@chakra-ui/react' 
+import {  Avatar} from '@chakra-ui/react' 
 import { Drawer,} from '@chakra-ui/react'
 import { DrawerOverlay  , DrawerContent,  DrawerBody , Button  , useDisclosure} from '@chakra-ui/react'
-import { Link } from 'react-router-dom';
 import {  HStack } from '@chakra-ui/react'; 
 import {  Box } from '@chakra-ui/react';
-import { useMediaQuery, Image } from '@chakra-ui/react';
+import { useMediaQuery } from '@chakra-ui/react';
 import logo from "../assets/logo.png"
+import { useDispatch, useSelector } from "react-redux";
+import {  setLogout } from "../state";
+import { useNavigate } from "react-router-dom";
+import { Text } from '@chakra-ui/react';
 
 function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isMobile] = useMediaQuery("(max-width: 768px)");
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const fullName = user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "";
 
   return (
     <>
@@ -39,43 +45,35 @@ function Header() {
       <DrawerContent bgColor={"whiteAlpha.100"}>
         <DrawerBody >
         <HStack justifyContent={"center"}>
-                    <Button onClick={onClose}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" } }
+                    <Button onClick={()=>navigate("/login")}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" } }
         sx={{
           "&:hover > *": {
             color: "white",
           },
-        }}>
-                        <Link to={'/Login'}>Login</Link>
+        }}> Login
                     </Button>
-                    <Button onClick={onClose}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" }}
+                    <Button onClick={()=>navigate("/listing")}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" }}
         sx={{
           "&:hover > *": {
             color: "white",
           },
-        }}>
-                        <Link to={'/listing'}>List Books</Link>
+        }}>    Book List 
                     </Button>
                    
 
                     <Box mx={4}>
                             < Avatar src={logo} alt="Logo" variant={"ghost"} objectFit="contain"   size={isMobile?"md" : "lg"} />
                      </Box>
-                    <Button onClick={onClose}  variant={"ghost"} size={isMobile?"sm" : "md"} textColor={'white'} _hover={{ bg: "#c961de" }}
+                   
+                    <Button onClick={()=> dispatch(setLogout())} size={isMobile?"sm" : "md"} variant={"ghost"} textColor={'white'} _hover={{ bg: "#c961de" }}
         sx={{
           "&:hover > *": {
             color: "white",
           },
         }}>
-                        <Link to={'/AboutUs'}>About Us</Link>
+                        LogOut
                     </Button>
-                    <Button onClick={onClose} size={isMobile?"sm" : "md"} variant={"ghost"} textColor={'white'} _hover={{ bg: "#c961de" }}
-        sx={{
-          "&:hover > *": {
-            color: "white",
-          },
-        }}>
-                        <Link to={'/contact'}> Contact </Link>
-                    </Button>
+                    <Text textColor={"white"}   fontSize={"lg"}>{fullName} ggg</Text>
                 </HStack>
         </DrawerBody>
       </DrawerContent>
