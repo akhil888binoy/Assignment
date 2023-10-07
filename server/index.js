@@ -6,13 +6,14 @@ import dotenv from "dotenv";
 import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
-import bookRoutes from "./routes/posts.js";
+import bookRoutes from "./routes/books.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 import userRoutes from "./routes/users.js";
 import { verifyToken } from "./middleware/auth.js";
+import { createBook } from "./controllers/books.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -41,7 +42,7 @@ const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", upload.single("picture"), register);
-app.post("/books", verifyToken, upload.single("picture"), createPost);
+app.post("/books", verifyToken, upload.single("picture"), createBook);
 
 /* ROUTES */
 app.use("/auth", authRoutes);

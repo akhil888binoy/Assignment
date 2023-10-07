@@ -7,12 +7,12 @@ import { Avatar, Box ,
   CardBody, CardFooter,  
   Text , Button ,   
   VStack } from '@chakra-ui/react';
-import img2 from "../../assets/logo.png";
-import img3 from "../../assets/coverlogin.jpg";
-
-
-
-
+  import { useEffect } from "react";
+  import { useDispatch } from "react-redux";
+import ListWidget from '../widgets/ListWidget';
+import { useSelector } from 'react-redux';
+import BookWidget from '../widgets/BookWidget';
+import { setBooks } from '../../state';
 
 
 const cardOptions={
@@ -24,35 +24,50 @@ const cardOptions={
    size:"4x1",
 }
 
-const hackathonOptions={
- position : "absolute",
-  
-  
-   transform : "translate(-50%, -50%)",
-   p:"4",
-   size:"4x1",
-}
-
-
-const hackathonfooterOptions={
- position : "absolute",
-  
-   
-   transform : "translate(-50%, -50%)",
-   p:"4",
-   size:"4x1",
-}
 
 
 
 
 
-const BookListing = () => {
+const BookListing = ({ userId, isProfile = false }) => {
  
  
 
    const [isMobile] = useMediaQuery("(max-width: 768px)");
+   const { _id, picturePath } = useSelector((state) => state.user);
 
+   const dispatch = useDispatch();
+   const books = useSelector((state) => state.books);
+   const token = useSelector((state) => state.token);
+ 
+   const getBooks = async () => {
+     const response = await fetch("http://localhost:5174/books", {
+       method: "GET",
+       headers: { Authorization: `Bearer ${token}` },
+     });
+     const data = await response.json();
+     dispatch(setBooks({ books: data }));
+   };
+ 
+   const getUserBooks = async () => {
+     const response = await fetch(
+       `http://localhost:5174/books/${userId}/books`,
+       {
+         method: "GET",
+         headers: { Authorization: `Bearer ${token}` },
+       }
+     );
+     const data = await response.json();
+     dispatch(setBooks({ books: data }));
+   };
+ 
+   useEffect(() => {
+     if (isProfile) {
+       getUserBooks();
+     } else {
+       getBooks();
+     }
+   }, []); // eslint-disable-line react-hooks/exhaustive-deps
  
 
 
@@ -72,7 +87,7 @@ const BookListing = () => {
            alignItems={isMobile ? "center" : "flex-start"}
            flexWrap={isMobile ? "wrap" : "nowrap"}
            direction={["column", "row"]}>
-<Card  bgColor={"whiteAlpha.100"}w={"28rem"} display={isMobile ? "none" : ""}>
+<Card  bgColor={"blackAlpha.700"}w={"28rem"} display={isMobile ? "none" : ""}>
 <CardBody >
 <Center>
 <Heading size='md' mt={"4"} textColor={"white"}>Filters
@@ -129,7 +144,7 @@ const BookListing = () => {
 
 
 //Books for sale 
-<Card  bgColor={"whiteAlpha.200"} width={isMobile?"340px" : "1000px"} className='HackathonsCard' mt={isMobile ? "24rem" : "25px"}  >
+<Card  bgColor={"whiteAlpha.200"} width={isMobile?"340px" : "1000px"} className='booksCard' mt={isMobile ? "24rem" : "25px"}  >
 <CardBody >
 <Center>
 <Heading size='lg' textColor={"white"} bgColor={"blackAlpha.800"} padding={"1rem"} borderRadius={"1.5rem"}>Books for Sale </Heading>
@@ -137,132 +152,46 @@ const BookListing = () => {
 <VStack mt='6' spacing='3'>
 
 
-<Card
-direction={{ base: 'column', sm: 'row' }}
-overflow='hidden'
-variant='outline'
-w={isMobile ? "330px" : "650px"} 
-h={isMobile ? "30rem" : ""}
-
->
-<Stack direction={isMobile? "column":"row"} gap={"none"}>
-
-<Image
-objectFit='cover'
-w={isMobile ? "30rem" : "220px"}
-src={img2}
-alt='Caffe Latte'
-
-/>
-
-<Stack>
-<Image
-objectFit="cover"
-src={img3}
-alt='Caffe Latte'
-h={isMobile ? "20rem" : ""}
-w={isMobile ? "" : "50rem"}
-/>
-
-
-<CardBody {...hackathonOptions}  ml={isMobile? "7rem" : "7rem"}  mt={isMobile  ? "1rem" : "5rem"} mb={isMobile? "10rem" : ""}>
-
-<Heading size={isMobile ? "lg" : "lg"} mt={isMobile?"18rem" : " "} textColor={"white"}> Book Title</Heading>
-  
-
-  
-<Text textColor={"white"} my={isMobile ? "3" : "4"} textAlign={"center"}  fontWeight={"bold"} fontSize={isMobile ? "15px" : "15px"} borderRadius={"10px"} bgColor={"purple"}>
- Name of Seller
-</Text>
-
-<Text textColor={"white"} my={isMobile ? "3" : "4"} textAlign={"center"}  fontWeight={"bold"} fontSize={isMobile ? "15px" : "15px"} borderRadius={"10px"} bgColor={"purple"}>
- Genre
-</Text>
-
-  
-
-</CardBody>
-
-<CardFooter {...hackathonfooterOptions} ml={isMobile? "11rem": "12rem"} mt={isMobile? "3rem":"11rem"} mr={isMobile?"10rem":""} >
-<Button variant='solid' textColor={"white"} bgGradient={"linear-gradient(315deg, #facc6b 0%, #fabc3c 74%)"} mx={isMobile ? "4" : "9"} size={isMobile ? "sm" : "md"}>
-$1000
-</Button>
-<Button variant='solid' textColor={"white"}  bgColor={"#1c1c65"} size={isMobile ? "sm" : "md"}  mr="10" >
- Name of Author
-</Button>
-
-</CardFooter>
-</Stack>
-  
-</Stack>
-
-</Card>
-
-
+{books.map(
+        ({
+          _id,
+          userId,
+          firstName,
+          lastName,
+          bookTitle,
+          description,
+          author,
+          genre,
+          price,
+          picturePath,
+          userPicturePath,
+          likes,
+         
+        }) => (
+          <BookWidget
+            key={_id}
+            bookId={_id}
+            bookUserId={userId}
+            bookTitle={bookTitle}
+            name={`${firstName} ${lastName}`}
+            description={description}
+            author={author}
+            price={price}
+            genre={genre}
+            picturePath={picturePath}
+            userPicturePath={userPicturePath}
+            likes={likes}
+          />
+        )
+      )}
 
 
 
 </VStack>
 </CardBody>
 </Card>
+<ListWidget picturePath={picturePath}  ></ListWidget>
 
-<Card  bgColor={"whiteAlpha.100"}w={"300px"} mx={isMobile ? "100" : ""} display={isMobile? "none":""}>
- <CardBody >
-   <Center>
-           
-       <Avatar objectFit="contain" w="150px" h="150px"  borderWidth={"5px"} borderColor={"purple"}
-       src={img2}
-     alt='Green double couch with wooden legs'     
-   />
-     
-   </Center>
-   <Center>
-   <Heading size='md' mt={"4"}>Akhil Binoy
-</Heading>
-   
-   </Center>
-   <Center>
-   <Text size={"md"}>25 points</Text>
-   </Center>
-   
-   <VStack mt='6' spacing='3'>
-     <Heading size='md'>Top Builders</Heading>
-<Card
-mt={"3"}
- bgColor={"whiteAlpha.200"}
- direction={{ base: 'column', sm: 'row' }}
- overflow='hidden'
- variant='outline'
- size={"md"}
- maxH={"100px"}
- _hover={{ bgGradient:'linear-gradient(316deg, #310e68 0%, #5f0f40 74%)' }}
-       sx={{
-         "&:hover > *": {
-           color: "white",
-         },
-       }}
->
- <Avatar
-   mx={"3"}
-   mt={"3"}
-   objectFit='cover'
-   size={'lg'}
-   src={img2}
-   alt='Caffe Latte'
- />
-
- <Stack>
-   <CardBody objectFit={"contain"} >
-     <Heading size='md'>Akhil Binoy</Heading>
-     <Text fontSize={"10px"}>100 points</Text>
-   </CardBody>
- </Stack>
- </Card>
- 
-   </VStack>
- </CardBody>
- 
-</Card>
 
      
            </Stack>
@@ -270,7 +199,7 @@ mt={"3"}
        </Box>
              
              
-
+      
    </Box>
    
  )

@@ -69,15 +69,14 @@ const Form = () => {
 
 
   const register = async (values, onSubmitProps) => {
-    // this allows us to send form info with image
+    // this allows us to send form info 
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "http://localhost:3000/auth/register",
+      "http://localhost:5174/auth/register",
       {
         method: "POST",
         body: formData,
@@ -89,7 +88,7 @@ const Form = () => {
     if (savedUser) {
       setPageType("login");
     }
-    /* Yes, the values from the frontend will
+    /* the values from the frontend will
      be transferred to the database using the /auth/register 
      endpoint. The /auth/register endpoint is a RESTful
       endpoint that is used to register new users.
@@ -99,7 +98,7 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3000/auth/login", {
+    const loggedInResponse = await fetch("http://localhost:5174/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -113,7 +112,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
-      navigate("/home");
+      navigate("/listing");
     }
   };
   
@@ -231,9 +230,12 @@ const Form = () => {
         
         type="password" placeholder="Password" mb="6" _placeholder={{ opacity: 1, color: 'white' }}/>
       </FormControl>
+
+
       <Center>
       <Button colorScheme='teal' 
         borderRadius={"20"} size='lg' 
+        
         bgColor="#6617cb"
                    bgImage="linear-gradient(315deg, #6617cb 0%, #cb218e 74%)"  _hover={{ bg: "#c961de" }}
                              sx={{

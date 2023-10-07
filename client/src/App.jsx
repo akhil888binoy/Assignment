@@ -6,15 +6,17 @@ import LoginPage from './scenes/loginPage';
 import Header from './components/Header';
 import BookList from './scenes/listingPage';
 import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 function App() {
-  const mode = useSelector((state) => state.mode);
+  const isAuth = Boolean(useSelector((state) => state.token));
+
 
   return (
     <Router>
       <Header></Header>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/listing" element={< BookList/>} ></Route>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/listing" element={   < BookList/> } ></Route>
 
       </Routes>
       <Footer></Footer>

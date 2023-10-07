@@ -73,7 +73,7 @@ function Header() {
         }}>
                         LogOut
                     </Button>
-                    <Text textColor={"white"}   fontSize={"lg"}>{fullName} ggg</Text>
+                    <Text textColor={"white"}   fontSize={"lg"}>{fullName}</Text>
                 </HStack>
         </DrawerBody>
       </DrawerContent>
