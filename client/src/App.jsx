@@ -16,7 +16,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/listing" element={   < BookList/> } ></Route>
+        <Route path="/listing"  element={isAuth ? <BookList /> : <Navigate to="/" />} ></Route>
 
       </Routes>
       <Footer></Footer>
